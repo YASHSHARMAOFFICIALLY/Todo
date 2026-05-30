@@ -19,6 +19,7 @@ export async function signupController(req: Request, res: Response) {
     return res.status(500).json({ message });
   }
 }
+
 export async function signinController(req: Request, res: Response) {
   try {
     const parsed = SigninSchema.safeParse(req.body);

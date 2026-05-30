@@ -37,3 +37,47 @@
 - 2026-05-27 | todo.rs | Wrong derives on struct (EnumIter, DeriveActiveEnum) | Fixed after prompting
 - 2026-05-27 | user.rs | Same wrong derives on struct | Fixed independently second time
 - 2026-05-27 | user.rs | Extra comma in derives | Fixed independently
+
+## TypeScript Todo Backend (Express + Prisma)
+
+### Understood (answered correctly under grill)
+- Default vs named imports — `import x from` vs `import { x } from`
+- Relative paths — `./` for same level, `../` for parent, no prefix = node_modules
+- `app.use(path, router)` — mounting a router at a prefix
+- Express route prefix + router path combination (e.g. `/api/auth` + `/signup`)
+- `getUserId(req)` — calling a plain function vs Zod `.safeParse()`
+- Spread syntax `{ ...obj, key: value }` to merge objects
+- `parseInt()` — global function, not a string method
+- `updateTodo(id, userid, data)` — passing 3 separate args vs one object
+- HTTP methods: POST for create, GET for read, PUT for update, DELETE for delete
+- Status codes: 201 for created, 200 for success
+- `return` vs `throw` — different control flow mechanisms
+- JWT type consistency — sign a number, decode as number
+
+### Shaky (needed hints or got partially wrong)
+- Import paths — tried `@routes/...` (alias without config), `"routes/..."` (missing `./`), included `.ts` extension
+- `app.use()` — first tried `app.use(api/auth/signin)` without string quotes or router arg
+- `parseInt` — tried `req.params.id.parseInt()` (method syntax instead of global function)
+- `getUserId` — tried `.safeParse(req.id)` (confused with Zod pattern), then `req.body`, then `req.header`
+- Object spread — needed the pattern shown before writing it
+- `getTodoController` — added unnecessary Zod-style `.success` check on userId
+
+### Not Yet Covered
+- Running the app and testing endpoints
+- Error handling edge cases (e.g. NaN userid from JWT)
+- TypeScript types for Express middleware (NextFunction)
+- Environment variables setup (.env)
+- Prisma schema field naming conventions (Description vs description)
+
+### Errors Made in Code
+- 2026-05-30 | index.ts | Incomplete `import` statement (line 2) | Fixed after prompting
+- 2026-05-30 | todo.controller.ts | Import from wrong path `../lib/schema` | Fixed after pointing out
+- 2026-05-30 | todo.controller.ts | Name collision — function and import both `createTodo` | Fixed to `createTodoController`
+- 2026-05-30 | todo.controller.ts | `res.json(400)` instead of `res.status(400)` | Fixed after pointing out (missed once on second occurrence)
+- 2026-05-30 | todo.controller.ts | Mixed `async function name() =>` syntax | Fixed after explaining two styles
+- 2026-05-30 | todo.controller.ts | `unKnown` instead of `unknown` | Fixed
+- 2026-05-30 | todo.controller.ts | `res.staus(500)` typo | Fixed
+- 2026-05-30 | todo.controller.ts | `return throw new Error()` — mixed return and throw | Fixed after explanation
+- 2026-05-30 | auth.middleware.ts | `@lib/jwt` alias without tsconfig | Fixed to `./jwt`
+- 2026-05-30 | auth.middleware.ts | `startWith` instead of `startsWith` | Fixed
+- 2026-05-30 | jwt.ts | `userId: string` return type instead of `number` | Fixed after explanation

@@ -1,12 +1,12 @@
-import  jwt  from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 export const generateToken = (userId: number) => {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
     expiresIn: "1h",
-  })
-  return token
-}
+  });
+  return token;
+};
 
 export const verifyToken = (token: string) => {
-  const decoded = jwt.verify(token, process.env.JWT_SECRET!)
-  return decoded as { userId: string }
-}
+  const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+  return decoded as { userId: number };
+};

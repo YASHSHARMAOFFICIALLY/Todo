@@ -24,5 +24,5 @@ export const SigninSchema = z.object({
 export const todoschema = z.object({
   title: z.string().min(3, "title should be 3 character atleast"),
   description: z.string().min(4, "description should be 4 character"),
-  status: z.string(),
+  status: z.enum(["NOT_STARTED", "IN_PROGRESS", "COMPLETED"]),
 });
